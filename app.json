@@ -1,10 +1,8 @@
 {
   "expo": {
-    "name": "my-app",
+    "name": "react-native-web-hacker-news-clone",
     "slug": "my-app",
     "platforms": [
-      "ios",
-      "android",
       "web"
     ],
     "version": "1.0.0",

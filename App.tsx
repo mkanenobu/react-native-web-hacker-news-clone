@@ -1,9 +1,8 @@
 import React from "react";
-import 'react-native-gesture-handler'
-import { MainRouter } from "./router/MainRouter";
+import { Container } from "./containers/Container";
 
 const App = () => {
-  return <MainRouter />;
+  return <Container />;
 };
 
 export default App;

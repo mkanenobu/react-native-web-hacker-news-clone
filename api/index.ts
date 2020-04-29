@@ -1,5 +1,3 @@
-import { OneOf } from "../utils/type_utils";
-
 // `/v0/user/`
 export interface User {
   id: string; // unique username
@@ -29,35 +27,51 @@ export interface Item {
   descendants?: number; // In the case of stories or polls, the total comment count.
 }
 
-export type StoryType = "top" | "new" | "best" | "ask" | "show" | "job";
-export const StoryCategories: StoryType[] = ["top", "new", "best", "ask", "show", "job"];
+export type Categories =
+  | "top"
+  | "new"
+  | "best"
+  | "ask"
+  | "show"
+  | "job"
+  | "user";
+export const StoryCategories: Categories[] = [
+  "top",
+  "new",
+  "best",
+  "ask",
+  "show",
+  "job",
+];
 
 const baseUrl = "https://hacker-news.firebaseio.com/v0";
 
-const getBase = async (endpoint: string): Promise<any> => {
-  return (await fetch(`${baseUrl}${endpoint}.json`)).json();
-};
+export class Api {
+  private static async fetchBase(endpoint: string): Promise<any> {
+    return (await fetch(`${baseUrl}${endpoint}.json`)).json();
+  }
 
-export const getStories = async (type: StoryType): Promise<number[]> => {
-  return await getBase(`/${type}stories`);
-};
+  static getStories(type: Categories): Promise<number[]> {
+    return this.fetchBase(`/${type}stories`);
+  }
 
-export const getShowStories = async (): Promise<number[]> => {
-  return await getBase("/showstories");
-};
+  static getShowStories(): Promise<number[]> {
+    return this.fetchBase("/showstories");
+  }
 
-export const getJobStories = async (): Promise<number[]> => {
-  return await getBase("/jobstories");
-};
+  static getJobStories(): Promise<number[]> {
+    return this.fetchBase("/jobstories");
+  }
 
-export const getItem = async (id: number): Promise<Item> => {
-  return await getBase(`/item/${id}`);
-};
+  static getItem(id: number): Promise<Item> {
+    return this.fetchBase(`/item/${id}`);
+  }
 
-export const getItems = (ids: number[]): Promise<Item[]> => {
-  return Promise.all(ids.map((id) => getItem(id)));
-};
+  static getItems(ids: number[]): Promise<Item[]> {
+    return Promise.all(ids.map((id) => this.getItem(id)));
+  }
 
-export const getUser = async (id: string): Promise<User> => {
-  return await getBase(`/user/${id}`);
-};
+  static getUser(id: string): Promise<User> {
+    return this.fetchBase(`/user/${id}`);
+  }
+}
