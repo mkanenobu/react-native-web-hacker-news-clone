@@ -1,2 +1,3 @@
-[Expo](https://expo.io/)
-[TypeScript](https://www.typescriptlang.org/)
+Expo: https://expo.io/
+
+TypeScript: https://www.typescriptlang.org/
