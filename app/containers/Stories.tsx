@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 
 import { Story, Border } from "../components";
-import { Api, Item, Categories, StoryCategories } from "../api";
+import { Api } from "../api";
+
+import type { Category, Item } from "../types";
 
 const sliceByPage = (arr: any[], page: number, perPage: number = 15): any[] =>
   arr.slice(page * perPage, (page + 1) * perPage);
 
 export const Stories: React.FC<{
-  category: Categories;
-  setCategory: (c: Categories) => void;
+  category: Category;
+  setCategory: (c: Category) => void;
 } | null> = (props) => {
   const [page, setPage] = useState(0);
   const [stories, setStories] = useState<Item[]>([]);

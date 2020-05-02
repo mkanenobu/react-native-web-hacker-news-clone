@@ -1,4 +1,3 @@
-// `/v0/user/`
 export interface User {
   id: string; // unique username
   delay?: number; // Delay in minutes between a comment's creation and its visibility to other users.
@@ -27,7 +26,7 @@ export interface Item {
   descendants?: number; // In the case of stories or polls, the total comment count.
 }
 
-export type Categories =
+export type Category =
   | "top"
   | "new"
   | "best"
@@ -35,43 +34,3 @@ export type Categories =
   | "show"
   | "job"
   | "user";
-export const StoryCategories: Categories[] = [
-  "top",
-  "new",
-  "best",
-  "ask",
-  "show",
-  "job",
-];
-
-const baseUrl = "https://hacker-news.firebaseio.com/v0";
-
-export class Api {
-  private static async fetchBase(endpoint: string): Promise<any> {
-    return (await fetch(`${baseUrl}${endpoint}.json`)).json();
-  }
-
-  static getStories(type: Categories): Promise<number[]> {
-    return this.fetchBase(`/${type}stories`);
-  }
-
-  static getShowStories(): Promise<number[]> {
-    return this.fetchBase("/showstories");
-  }
-
-  static getJobStories(): Promise<number[]> {
-    return this.fetchBase("/jobstories");
-  }
-
-  static getItem(id: number): Promise<Item> {
-    return this.fetchBase(`/item/${id}`);
-  }
-
-  static getItems(ids: number[]): Promise<Item[]> {
-    return Promise.all(ids.map((id) => this.getItem(id)));
-  }
-
-  static getUser(id: string): Promise<User> {
-    return this.fetchBase(`/user/${id}`);
-  }
-}

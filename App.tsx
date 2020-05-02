@@ -1,8 +1,6 @@
 import React from "react";
-import { Container } from "./containers/Container";
+import AppMain from "./app";
 
-const App = () => {
-  return <Container />;
-};
+const App = () => <AppMain />;
 
 export default App;
