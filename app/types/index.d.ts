@@ -26,11 +26,4 @@ export interface Item {
   descendants?: number; // In the case of stories or polls, the total comment count.
 }
 
-export type Category =
-  | "top"
-  | "new"
-  | "best"
-  | "ask"
-  | "show"
-  | "job"
-  | "user";
+export type Category = "top" | "new" | "best" | "ask" | "show" | "job" | "user";
